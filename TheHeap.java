@@ -1,14 +1,14 @@
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public class BinaryHeap<AnyType extends Comparable<AnyType>>
+public class TheHeap<AnyType extends Comparable<AnyType>>
 {
     private static final int CAPACITY = 2;
 
     private int size;            // Number of elements in heap
     private AnyType[] heap;     // The heap array
 
-    public BinaryHeap()
+    public TheHeap()
     {
         size = 0;
         heap = (AnyType[]) new Comparable[CAPACITY];
@@ -17,7 +17,7 @@ public class BinaryHeap<AnyType extends Comparable<AnyType>>
     /**
      * Construct the binary heap given an array of items.
      */
-    public BinaryHeap(AnyType[] array)
+    public TheHeap(AnyType[] array)
     {
         size = array.length;
         heap = (AnyType[]) new Comparable[array.length+1];
@@ -100,6 +100,11 @@ public class BinaryHeap<AnyType extends Comparable<AnyType>>
         }
         return false;
     }
+
+    public void update() {
+        percolatingDown(1);
+    }
+
 
 
 

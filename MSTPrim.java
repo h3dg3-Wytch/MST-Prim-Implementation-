@@ -25,8 +25,8 @@ public class MSTPrim {
     }
 
     public void execute( int graph[][] ) {
-
-        BinaryHeap<Node> heap = new BinaryHeap<Node>();
+        //We make the heap
+        TheHeap<Node> heap = new TheHeap<Node>();
 
 
         //Transfrom the matrix into the nodes
@@ -43,39 +43,54 @@ public class MSTPrim {
                     n.getEdgeList().add(edge);
                 }
             }
+            //add the nodes to the node list
             nodes.add(n);
         }
 
+        //For each node, we set the key to infinity and it's parent to null
         for(Node n : nodes){
             n.setKey(Integer.MAX_VALUE);
             n.setParent(null);
         }
+        //We set the root key equal to zero
         Node root = nodes.get(0);
         root.setKey(0);
+        //Put all the nodes in the heap
         for(Node n : nodes){
             heap.insert(n);
         }
 
-
+        //I was lazy and put this in a try catch block, if it ends that means we got to the end
         try{
             while(true){
+                //Get node with the min key
                 Node n = heap.deleteMin();
+                //Print out what the heap looks like
                 System.out.println(heap);
+                //Go through each ede in the node
                 for(Edge e : n.getEdgeList()){
+                    //We get the temp node, we are able to do this due to the ids that we made
                     Node temp = nodes.get(e.getDestinationNode());
+                    //If the heap contains the node, and the weight of the edge is less than that of the key
                     if(heap.contains(temp) && e.getWeight() < temp.getKey() ){
+                        //Set the parent node to the current min key node
                         temp.setParent(n.getIdOfNode());
+                        //Set the key to the weight of the edge
                         temp.setKey(e.getWeight());
                     }
                 }
+                //Ad d this min node to the results
                 result.add(n);
             }
 
         }catch (Exception e){
+            //We come here when the heap is empty
 
         }
 
+        //Test case to make sure the heap is empty
         System.out.println(heap);
+        //Print out the result node's key
 
         for(Node n : result){
             System.out.println(n.getKey());

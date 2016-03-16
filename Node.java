@@ -122,7 +122,7 @@ public class Node implements Comparable<Node>{
 
     @Override
     public String toString() {
-        return "ID: " + idOfNode + " Key: " + idOfNode + " Parent: " + parent;
+        return "ID: " + idOfNode + " Key: " + key + " Parent: " + parent +"\n";
     }
 
     @Override
